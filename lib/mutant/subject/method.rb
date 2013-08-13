@@ -48,7 +48,7 @@ module Mutant
       # @api private
       #
       def generate_mutations(emitter)
-        emitter << noop_mutation
+        noop_mutations.each { |noop| emitter << noop }
         Mutator.each(node) do |mutant|
           emitter << Mutation::Evil.new(self, mutant)
         end

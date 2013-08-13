@@ -41,20 +41,22 @@ module Mutant
           # @api private
           #
           def generate_mutations(emitter)
-            emitter << noop_mutation
+            noop_mutations.each { |noop| emitter << noop }
             Mutator.each(node) do |mutant|
               emitter << Mutation::Evil.new(self, memoizer_node(mutant))
             end
           end
 
-          # Return neutral mutation
+          # Return neutral mutations
           #
-          # @return [Mutation::Neutral]
+          # @return [Enumerable<Mutation::Neutral>]
           #
           # @api private
           #
-          def noop_mutation
-            Mutation::Neutral::Noop.new(self, memoizer_node(node))
+          def noop_mutations
+            [Mutation::Neutral::Null, Mutation::Neutral::Noop].map do |noop|
+              noop.new(self, memoizer_node(node))
+            end
           end
 
           # Return memoizer node for mutant

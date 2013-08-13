@@ -21,6 +21,7 @@ require 'anima'
 require 'concord'
 require 'rspec'
 require 'rspec/core/formatters/base_text_formatter'
+require 'awesome_print'
 
 # Library namespace
 module Mutant

@@ -28,6 +28,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency('anima',               '~> 0.0.6')
   gem.add_runtime_dependency('concord',             '~> 0.1.3')
   gem.add_runtime_dependency('rspec',               '~> 2.14.1')
-
+  gem.add_runtime_dependency('awesome_print',       '~> 1.1.0')
   gem.add_development_dependency('bundler', '~> 1.3', '>= 1.3.5')
 end

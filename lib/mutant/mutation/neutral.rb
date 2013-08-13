@@ -14,7 +14,7 @@ module Mutant
 
         # Indicate if a killer should treat a kill as problematic
         #
-        # @return [false] Killing noop mutants is a serious problem. Failures
+        # @return [true] Killing noop mutants is a serious problem. Failures
         #   in noop may indicate a broken test suite, but they can also be an
         #   indication  mutant has altered the runtime environment in a subtle
         #   way and tickled an odd bug
@@ -25,7 +25,27 @@ module Mutant
           true
         end
 
-      end
+      end # Noop
+
+      # Null mutation, mutation that doesn't alter the code being run at all.
+      # The difference between a null and a noop is that noop executes
+      # +unparse(parse(code))+, and null executes +code+.
+      class Null < self
+        SYMBOL = 'null'
+
+        # Indicate if a killer should treat a kill as problematic
+        #
+        # @return [true] If the killer kills the original code the test suite
+        #   is broken
+        def should_survive?
+          true
+        end
+
+        # Dummy-out mutated node insert
+        def insert
+          self
+        end
+      end # Null
 
       # Return identification
       #

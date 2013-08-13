@@ -105,14 +105,16 @@ module Mutant
 
   private
 
-    # Return neutral mutation
+    # Return neutral mutations
     #
-    # @return [Mutation::Neutral]
+    # @return [Enumerable<Mutation::Neutral>]
     #
     # @api private
     #
-    def noop_mutation
-      Mutation::Neutral::Noop.new(self, node)
+    def noop_mutations
+      [Mutation::Neutral::Null, Mutation::Neutral::Noop].map do |noop|
+        noop.new(self, node)
+      end
     end
 
     # Generate mutations

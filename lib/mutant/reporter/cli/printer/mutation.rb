@@ -23,6 +23,8 @@ module Mutant
             case mutation
             when Mutant::Mutation::Neutral::Noop
               Noop
+            when Mutant::Mutation::Neutral::Null
+              Null
             when Mutant::Mutation::Evil, Mutant::Mutation::Neutral
               Diff
             else
@@ -80,6 +82,11 @@ module Mutant
             end
 
           end # Noop
+
+          class Null < self
+            def details
+            end
+          end
 
           # Reporter for neutral and evil mutations
           class Diff < self
